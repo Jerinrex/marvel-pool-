@@ -16,7 +16,7 @@ export default function AboutPage() {
           <div className="breadcrumb">
             <Link to="/">Home</Link> &gt; <span>About Us</span>
           </div>
-          <h1>About The Marvel Pools</h1>
+          <h1>About Us</h1>
           <p>Creating Exceptional Swimming Spaces</p>
         </div>
       </section>
