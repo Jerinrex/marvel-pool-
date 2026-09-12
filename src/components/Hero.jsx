@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import './Hero.css'
 import img1 from '../assets/hero_image/Luxury swimming pool with palm trees at sunset _ Premium AI-generated image.png'
 import img2 from '../assets/hero_image/Nice swimming pool outdoors on bright summer day _ Premium Photo.png'
@@ -43,8 +44,8 @@ export default function Hero() {
           From elegant residential pools to world-class commercial aquatic facilities, we design, build, renovate, and maintain swimming pools that combine luxury, durability, and innovation.
         </p>
         <div className="hero-actions">
-          <a href="#contact" className="btn-primary">Get a Free Quote</a>
-          <a href="#projects" className="btn-ghost">View Our Projects</a>
+          <Link to="/contact" className="btn-primary">Get a Free Quote</Link>
+          <Link to="/projects" className="btn-ghost">View Our Projects</Link>
         </div>
       </div>
     </section>
