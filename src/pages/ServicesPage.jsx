@@ -35,7 +35,14 @@ export default function ServicesPage() {
                 <div className="service-card-content">
                   <h3>{s.title}</h3>
                   <div className="service-card-desc">
-                    {s.desc}
+                    <p>{s.desc}</p>
+                    {s.features && (
+                      <ul style={{ paddingLeft: '20px', marginTop: '10px', fontSize: '0.9rem', color: '#eaeaea', listStyleType: 'disc' }}>
+                        {s.features.map((f, i) => (
+                          <li key={i}>{f}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               </div>
