@@ -97,7 +97,11 @@ export default function ProjectsPage() {
                 className={getClassName(index)}
                 onClick={() => handleImageClick(index)}
               >
-                <img src={src} alt={`Project work ${index + 1}`} />
+                <img 
+                  src={src} 
+                  alt={`Project work ${index + 1}`} 
+                  loading={index > 4 ? 'lazy' : 'eager'} 
+                />
               </div>
             ))}
           </div>

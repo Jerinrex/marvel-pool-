@@ -74,11 +74,21 @@
   height: 450px;
   border-radius: 16px;
   overflow: hidden;
-  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); /* Smoother, world-class easing */
+  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); 
   cursor: pointer;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   will-change: transform, opacity, filter;
-  -webkit-box-reflect: below 5px linear-gradient(transparent, transparent, rgba(0,0,0,0.2)); /* Add reflection */
+  -webkit-box-reflect: below 5px linear-gradient(transparent, transparent, rgba(0,0,0,0.2)); 
+  
+  /* Skeleton Loading Background */
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .carousel-item img {
