@@ -1,0 +1,129 @@
+.contact {
+  padding: 80px 0;
+  background: var(--ink); /* the section behind the banner */
+}
+
+.contact-banner {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.contact-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(34, 52, 60, 0.85) 0%, rgba(34, 52, 60, 0.5) 100%);
+  z-index: 1;
+}
+
+.contact-banner-content {
+  position: relative;
+  z-index: 2;
+  padding: 80px 60px;
+  max-width: 800px;
+}
+
+.contact-banner-content h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 2.5rem;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.elegant-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-row-elegant {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.elegant-form input, .elegant-form select {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.elegant-form input:focus, .elegant-form select:focus {
+  outline: 2px solid var(--sea);
+  outline-offset: -2px;
+}
+
+.elegant-form input::placeholder {
+  color: #888;
+}
+
+.enquiry-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 12px auto;
+}
+
+.consent-elegant {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-size: 0.85rem;
+}
+.consent-elegant input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--sea);
+}
+.consent-elegant label {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.btn-elegant {
+  background: #254DE6; /* match the beautiful blue pill color */
+  color: #fff;
+  border: none;
+  padding: 16px 36px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-elegant:hover {
+  background: #1c3bb3;
+}
+
+.success-msg {
+  color: #a7f3d0;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 60px 0;
+  }
+  .contact-banner-content {
+    padding: 40px 20px;
+  }
+  .form-row-elegant {
+    grid-template-columns: 1fr;
+  }
+}

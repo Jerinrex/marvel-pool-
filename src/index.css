@@ -1,0 +1,59 @@
+:root{
+  /* -- Vibrant Pool Blue theme -- */
+  --ink:      #002447;   /* deep water navy */
+  --deep:     #00509E;   /* deep pool blue */
+  --sea:      #0080FF;   /* vibrant swimming pool azure */
+  --sea-light:#66B2FF;   /* clear water highlight */
+  --foam:     #F0F8FF;   /* bright aquatic white */
+  --foam-dim: #DCEEFD;
+  --sand:     #FFC300;   /* sunshine gold accent */
+  --sand-dim: #E6B000;
+  --card:     #003366;   /* dark pool tile */
+  --line:     rgba(240,248,255,0.14);
+  --ink-line: rgba(0,36,71,0.12);
+  --maxw: 1180px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Work Sans', sans-serif;
+  color:var(--ink);
+  background:var(--foam);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{
+  font-family:'Fraunces', serif;
+  font-weight:500;
+  letter-spacing:-0.01em;
+  line-height:1.08;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+button{font-family:inherit; cursor:pointer;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+}
+
+/* shared wave divider */
+.wave{display:block; width:100%; line-height:0;}
+.wave svg{width:100%; height:auto; display:block;}
+
+.about-tag{font-weight:600; font-size:1.25rem; margin-bottom:16px;}
+
+.btn-primary{
+  background:var(--sand); color:var(--ink); padding:15px 30px;
+  font-weight:600; font-size:0.98rem; border:none; border-radius:2px;
+  transition:background .2s ease, transform .2s ease; display:inline-block;
+}
+.btn-primary:hover{background:var(--sand-dim); transform:translateY(-1px);}
+
+.btn-ghost{
+  color:var(--foam); padding:15px 26px; font-weight:500; font-size:0.98rem;
+  border:1px solid var(--line); border-radius:2px; transition:border-color .2s ease;
+  display:inline-block;
+}
+.btn-ghost:hover{border-color:var(--sand);}

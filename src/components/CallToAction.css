@@ -1,0 +1,25 @@
+.cta-section {
+  padding: 100px 0;
+  background: var(--sea);
+  color: var(--foam);
+  text-align: center;
+}
+.cta-content h2 {
+  font-size: 2.8rem;
+  margin-bottom: 16px;
+}
+.cta-content p {
+  font-size: 1.2rem;
+  margin-bottom: 32px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-content .btn-primary {
+  background: var(--sand);
+  color: var(--ink);
+  font-size: 1.1rem;
+}
+.cta-content .btn-primary:hover {
+  background: var(--sand-dim);
+}

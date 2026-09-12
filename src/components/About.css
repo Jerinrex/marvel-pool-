@@ -1,0 +1,33 @@
+.about{background:var(--foam); padding:110px 0 90px;}
+.about-grid{
+  display:grid; grid-template-columns:0.95fr 1.05fr; gap:64px; align-items:start;
+}
+.about h2{font-size:clamp(2.4rem, 4vw, 3.2rem); max-width:420px;}
+.about-copy{margin-top:22px; font-size:1.02rem; color:#20463A; max-width:440px;}
+
+.pool-graphic{
+  position:relative; aspect-ratio:4/3.1; border-radius:2px; overflow:hidden;
+  background:linear-gradient(160deg, #0A4A3B 0%, #17997E 55%, #7FD9BE 100%);
+}
+.pool-graphic::before{
+  content:''; position:absolute; inset:0;
+  background-image:
+    repeating-linear-gradient(115deg, rgba(255,255,255,0.09) 0px, rgba(255,255,255,0.09) 2px, transparent 2px, transparent 34px),
+    repeating-linear-gradient(65deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 22px);
+  animation:shimmer 9s linear infinite;
+}
+@keyframes shimmer{
+  0%{background-position:0 0, 0 0;}
+  100%{background-position:120px 60px, -100px 80px;}
+}
+.pool-graphic .tile-edge{
+  position:absolute; left:0; right:0; bottom:0; height:14%;
+  background:repeating-linear-gradient(90deg, var(--sand) 0 26px, var(--sand-dim) 26px 28px);
+}
+
+@media (max-width:860px){
+  .about {
+    padding: 60px 0;
+  }
+  .about-grid{grid-template-columns:1fr; gap:40px;}
+}
