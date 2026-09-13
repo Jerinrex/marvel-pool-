@@ -9,6 +9,7 @@ export default function QuoteModal({ isOpen, onClose }) {
     message: ''
   })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   if (!isOpen) return null
 
@@ -16,14 +17,46 @@ export default function QuoteModal({ isOpen, onClose }) {
     setForm(f => ({ ...f, [field]: e.target.value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
-      setForm({ name: '', phone: '', email: '', message: '' })
-      onClose()
-    }, 2500)
+    setLoading(true)
+    
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          subject: 'Appointment Request',
+          from_name: form.name || 'Marvel Pools Visitor',
+          Name: form.name,
+          Phone: form.phone,
+          Email: form.email || 'Not provided',
+          Message: form.message,
+          Source: 'Floating Quote Modal'
+        })
+      })
+      
+      const json = await response.json()
+      if (response.ok) {
+        setSubmitted(true)
+        setTimeout(() => {
+          setSubmitted(false)
+          setForm({ name: '', phone: '', email: '', message: '' })
+          onClose()
+        }, 3000)
+      } else {
+        alert(json.message || "Failed to send message.")
+      }
+    } catch (error) {
+      console.error(error)
+      alert("Failed to send message.")
+    }
+    
+    setLoading(false)
   }
 
   return (
@@ -71,7 +104,9 @@ export default function QuoteModal({ isOpen, onClose }) {
               onChange={update('message')} 
             ></textarea>
             
-            <button type="submit" className="quote-modal-submit">Submit</button>
+            <button type="submit" className="quote-modal-submit" disabled={loading}>
+              {loading ? 'Sending...' : 'Submit'}
+            </button>
           </form>
         )}
       </div>

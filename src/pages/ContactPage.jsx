@@ -1,9 +1,67 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './ContactPage.css'
 import contactHeroImg from '../assets/contact/contact.png'
 
+const initialForm = {
+  name: '',
+  email: '',
+  phone: '',
+  organization: '',
+  city: '',
+  message: ''
+}
+
 export default function ContactPage() {
+  const [form, setForm] = useState(initialForm)
+  const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const update = (field) => (e) => {
+    setForm((f) => ({ ...f, [field]: e.target.value }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          subject: 'New Lead: Contact Page Quote Request',
+          from_name: form.name || 'Marvel Pools Visitor',
+          Name: form.name,
+          Email: form.email || 'Not provided',
+          Phone: form.phone,
+          Organization: form.organization || 'Not provided',
+          City: form.city,
+          Message: form.message,
+          Source: 'Dedicated Contact Page'
+        })
+      })
+      
+      const json = await response.json()
+      if (response.ok) {
+        setSubmitted(true)
+        setForm(initialForm)
+        setTimeout(() => setSubmitted(false), 5000)
+      } else {
+        alert(json.message || "Failed to send message.")
+      }
+    } catch (error) {
+      console.error(error)
+      alert("An error occurred while sending the message.")
+    }
+    
+    setLoading(false)
+  }
+
   return (
     <main className="contact-page">
       {/* Hero Section */}
@@ -30,23 +88,33 @@ export default function ContactPage() {
               <p className="form-desc">
                 Get a customized quote for your swimming pool. Our experts design, build, and maintain high-quality pools tailored to your needs. Fill in the details below and let us bring your vision to life.
               </p>
-              <form className="quote-form" onSubmit={(e) => e.preventDefault()}>
-                <div className="form-row">
-                  <input type="text" placeholder="Name" required />
-                  <input type="email" placeholder="Email (Optional)" />
+              
+              {submitted ? (
+                <div style={{ padding: '20px', backgroundColor: '#e8f5e9', color: '#2e7d32', borderRadius: '8px', marginTop: '20px' }}>
+                  <h4>Thank You!</h4>
+                  <p>Your request has been successfully submitted. We will contact you shortly.</p>
                 </div>
-                <div className="form-row">
-                  <input type="tel" placeholder="Contact Number" required />
-                  <input type="text" placeholder="Name of Organisation" />
-                </div>
-                <div className="form-row">
-                  <input type="text" placeholder="Your City" required />
-                </div>
-                <div className="form-row">
-                  <textarea placeholder="Additional Information" rows="5"></textarea>
-                </div>
-                <button type="submit" className="submit-btn">Submit</button>
-              </form>
+              ) : (
+                <form className="quote-form" onSubmit={handleSubmit}>
+                  <div className="form-row">
+                    <input type="text" placeholder="Name" required value={form.name} onChange={update('name')} />
+                    <input type="email" placeholder="Email (Optional)" value={form.email} onChange={update('email')} />
+                  </div>
+                  <div className="form-row">
+                    <input type="tel" placeholder="Contact Number" required value={form.phone} onChange={update('phone')} />
+                    <input type="text" placeholder="Name of Organisation" value={form.organization} onChange={update('organization')} />
+                  </div>
+                  <div className="form-row">
+                    <input type="text" placeholder="Your City" required value={form.city} onChange={update('city')} />
+                  </div>
+                  <div className="form-row">
+                    <textarea placeholder="Additional Information" rows="5" value={form.message} onChange={update('message')}></textarea>
+                  </div>
+                  <button type="submit" className="submit-btn" disabled={loading}>
+                    {loading ? 'Sending...' : 'Submit'}
+                  </button>
+                </form>
+              )}
             </div>
 
             {/* Right Column: Info Cards */}

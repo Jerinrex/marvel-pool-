@@ -13,17 +13,49 @@ const initialForm = {
 export default function Contact() {
   const [form, setForm] = useState(initialForm)
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const update = (field) => (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
     setForm((f) => ({ ...f, [field]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Enquiry submitted:', form)
-    setSubmitted(true)
-    setForm(initialForm)
+    setLoading(true)
+    
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          subject: 'New Lead: ' + form.enquiry,
+          from_name: form.name || 'Marvel Pools Visitor',
+          Name: form.name,
+          Phone: form.phone,
+          Email: form.email || 'Not provided',
+          Enquiry_Type: form.enquiry,
+          Source: 'Main Contact Form'
+        })
+      })
+      
+      const json = await response.json()
+      if (response.ok) {
+        setSubmitted(true)
+        setForm(initialForm)
+      } else {
+        alert(json.message || "Failed to send message.")
+      }
+    } catch (error) {
+      console.error(error)
+      alert("An error occurred while sending the message.")
+    }
+    
+    setLoading(false)
   }
 
   return (
@@ -64,7 +96,9 @@ export default function Contact() {
                 </label>
               </div>
 
-              <button type="submit" className="btn-elegant">Request A Call Back →</button>
+              <button type="submit" className="btn-elegant" disabled={loading}>
+                {loading ? 'Sending...' : 'Request A Call Back →'}
+              </button>
 
               {submitted && (
                 <p className="success-msg">

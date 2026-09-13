@@ -334,6 +334,15 @@
 }
 
 @media (max-width: 768px) {
+  .about-tabs {
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: none;
+  }
+  .about-tab {
+    width: 100%;
+    border-bottom: 1px solid var(--line);
+  }
   .pipeline-wrapper {
     margin-top: 40px;
   }

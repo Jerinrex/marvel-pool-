@@ -72,6 +72,15 @@ export default function AboutPage() {
           <div className="about-featured-image">
             <img src={contentImg} alt="Beautiful swimming pool" />
           </div>
+          
+          <div style={{ textAlign: 'center', marginTop: '40px' }}>
+            <Link to="/services" className="btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+              Explore Our Services 
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 

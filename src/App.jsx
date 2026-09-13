@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import WhatsAppFab from './components/WhatsAppFab.jsx'
+import ScrollToTop from './components/ScrollToTop.jsx'
 import HomePage from './pages/HomePage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
@@ -11,6 +12,7 @@ import ProjectsPage from './pages/ProjectsPage.jsx'
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
